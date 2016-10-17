@@ -70,7 +70,7 @@ public class GestorUsuarios
 		    token = -2;
 		}
 	    }
-	    Arrays.fill(truePassword, '0');	    
+	    Arrays.fill(password, '0');	    
 	}
 	else
 	{

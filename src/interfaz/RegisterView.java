@@ -17,31 +17,38 @@ import practicabanco.Controller;
 public class RegisterView extends javax.swing.JFrame
 {
     private Controller controller;
+    boolean[] fields = new boolean[6];
     /**
      * Creates new form RegisterWindow
      */
     public RegisterView()
     {
-	initComponents();
+        initComponents();
     }
     
     public RegisterView(Controller controller)
     {
-	initComponents();
-	this.controller = controller;
-	this.lblEmail.setText("");
-	this.lblID.setText("");
-	this.lblName.setText("");
-	this.lblPass1.setText("");
-	this.lblPass2.setText("");
-	this.lblSurname.setText("");
-	this.lblUsername.setText("");
-	
-	this.txtSurName.getDocument().addDocumentListener(new FieldsValidator("txtSurname"));
-	this.txtName.getDocument().addDocumentListener(new FieldsValidator("txtName"));
-	this.txtUserName.getDocument().addDocumentListener(new FieldsValidator("txtUsername"));
-	this.pswd.getDocument().addDocumentListener(new FieldsValidator("pswd"));
-	this.txtEmail.getDocument().addDocumentListener(new FieldsValidator("txtEmail"));
+        initComponents();
+        this.controller = controller;
+        this.lblEmail.setText("");
+        this.lblID.setText("");
+        this.lblName.setText("");
+        this.lblPass1.setText("");
+        this.lblPass2.setText("");
+        this.lblSurname.setText("");
+        this.lblUsername.setText("");
+
+        this.txtID.getDocument().addDocumentListener(new FieldsValidator("txtID"));
+        this.txtSurName.getDocument().addDocumentListener(new FieldsValidator("txtSurname"));
+        this.txtName.getDocument().addDocumentListener(new FieldsValidator("txtName"));
+        this.txtUserName.getDocument().addDocumentListener(new FieldsValidator("txtUsername"));
+        this.pswd.getDocument().addDocumentListener(new FieldsValidator("pswd"));
+        this.txtEmail.getDocument().addDocumentListener(new FieldsValidator("txtEmail"));
+    
+        for (int i = 0; i < fields.length; i++)
+        {
+            fields[i] = true;
+        }
     }
 
     /**
@@ -92,6 +99,13 @@ public class RegisterView extends javax.swing.JFrame
         jLabel6.setText("Contraseña");
 
         btnSend.setText("Enviar");
+        btnSend.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                btnSendActionPerformed(evt);
+            }
+        });
 
         btnCancel.setText("Cancelar");
         btnCancel.addActionListener(new java.awt.event.ActionListener()
@@ -158,7 +172,7 @@ public class RegisterView extends javax.swing.JFrame
                     .addComponent(lblID)
                     .addComponent(lblUsername)
                     .addComponent(lblPass1))
-                .addContainerGap(137, Short.MAX_VALUE))
+                .addContainerGap(138, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -199,11 +213,11 @@ public class RegisterView extends javax.swing.JFrame
                     .addComponent(lblPass1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblPass2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 90, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSend)
                     .addComponent(btnCancel))
-                .addGap(73, 73, 73))
+                .addContainerGap(71, Short.MAX_VALUE))
         );
 
         pack();
@@ -213,6 +227,11 @@ public class RegisterView extends javax.swing.JFrame
     {//GEN-HEADEREND:event_btnCancelActionPerformed
         controller.cancelRegister();
     }//GEN-LAST:event_btnCancelActionPerformed
+
+    private void btnSendActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnSendActionPerformed
+    {//GEN-HEADEREND:event_btnSendActionPerformed
+        
+    }//GEN-LAST:event_btnSendActionPerformed
 
     
     
@@ -289,176 +308,210 @@ public class RegisterView extends javax.swing.JFrame
     
     class FieldsValidator implements DocumentListener
     {
-	
-	//TODO method that checks if fields are OK and enables or disables button,
-	//instead of searching for it in every validation method.
-	String name;
 
-	public FieldsValidator(String name)
-	{
-	    this.name = name;
-	}
-	
-	
-	
-	
-	
-	@Override
-	public void insertUpdate(DocumentEvent e)
-	{
-	    checkToValidate();
-	}
+        //TODO method that checks if fields are OK and enables or disables button,
+        //instead of searching for it in every validation method.
+        String name;
+        
 
-	@Override
-	public void removeUpdate(DocumentEvent e)
-	{
-	    checkToValidate();
-	}
+        public FieldsValidator(String name)
+        {
+            this.name = name;
+        }
 
-	@Override
-	public void changedUpdate(DocumentEvent e)
-	{
-	    checkToValidate();
-	}
-	
-	private void checkToValidate()
-	{
-	    switch (this.name)
-	    {
-		case "txtName":
-		    validateName();
-		    break;
-		case "txtSurname":
-		    validateSurname();
-		    break;
-		case "txtEmail":
-		    validateEmail();
-		    break;
-		case "txtID":
-		    
-		    break;
-		case "txtUsername":
-		    validateUsername();
-		    break;
-		case "pswd":
-		    validatePswrd();
-		default:
-		    break;
-	    }
-	}
-	
-	private void validateEmail()
-	{
-	    Pattern pattern = Pattern.compile("[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,4}");
-	    Matcher matcher = pattern.matcher(txtEmail.getText().toUpperCase());
-	    
-	    if (!matcher.matches())
-	    {
-		lblEmail.setText("Formato inválido.");
-		btnSend.setEnabled(false);
-	    }
-	    else
-	    {
-		lblEmail.setText("");
-		btnSend.setEnabled(true);
-	    }
-	}
-	
-	private void validateUsername()
-	{
-	    String userName = txtUserName.getText();
-	
-	    if (controller.isValidText(userName))
-	    {
-		if (controller.checkUserExistence(userName))
-		{
-		    lblUsername.setText("El usuario ya existe.");
-		    btnSend.setEnabled(false);
-		}
-		else
-		{
-		    lblUsername.setText("");
-		    btnSend.setEnabled(true);
-		}
-	    }
-	}
-	
-	private void validatePswrd()
-	{
-	    char[] pass = pswd.getPassword();
-	    
-	    if (pass.length <= 6)
-	    {
-		lblPass1.setText("La contraseña debe tener al");
-		lblPass2.setText("menos siete caracteres.");
-		btnSend.setEnabled(false);
-	    }
-	    else
-	    {
-		lblPass1.setText("");
-		lblPass2.setText("");
-		btnSend.setEnabled(true);
-	    }	    
-	}
-	
-	private void validateName()
-	{
-	    String name = txtName.getText();
-	    if (controller.isValidText(name))
-	    {
-		if (!validateCapitalLetter(name))
-		{
-		    lblName.setText("Respete a la RAE.");
-		    btnSend.setEnabled(false);
-		}
-		else
-		{
-		    lblName.setText("");
-		    btnSend.setEnabled(true);
-		}
-	    }
-	}
-	
-	private void validateSurname()
-	{
-	    String surname = txtSurName.getText();
-	    if (controller.isValidText(surname))
-	    {
-		if (!validateCapitalLetter(surname))
-		{
-		    lblSurname.setText("Respete a la RAE.");
-		    btnSend.setEnabled(false);
-		}
-		else
-		{
-		    lblSurname.setText("");
-		    btnSend.setEnabled(true);
-		}
-	    }
-	}
-	
-	private boolean validateCapitalLetter(String phrase)
-	{	    
-	    return phrase.equals(capitalizeString(phrase));
-	}
-	
-	private String capitalizeString(String string)
-	{
-	    char[] chars = string.toLowerCase().toCharArray();
-	    boolean found = false;
-	    for (int i = 0; i < chars.length; i++)
-	    {
-		if (!found && Character.isLetter(chars[i]))
-		{
-		    chars[i] = Character.toUpperCase(chars[i]);
-		    found = true;
-		} else if (Character.isWhitespace(chars[i]))
-		{ // You can add other chars here
-		    found = false;
-		}
-	    }
-	    return String.valueOf(chars);
-	}
-	
+        @Override
+        public void insertUpdate(DocumentEvent e)
+        {
+            checkToValidate();
+        }
+
+        @Override
+        public void removeUpdate(DocumentEvent e)
+        {
+            checkToValidate();
+        }
+
+        @Override
+        public void changedUpdate(DocumentEvent e)
+        {
+            checkToValidate();
+        }
+
+        private void checkToValidate()
+        {
+            switch (this.name)
+            {
+            case "txtName":
+                validateName();
+                break;
+            case "txtSurname":
+                validateSurname();
+                break;
+            case "txtEmail":
+                validateEmail();
+                break;
+            case "txtID":
+                validateID();
+                break;
+            case "txtUsername":
+                validateUsername();
+                break;
+            case "pswd":
+                validatePswrd();
+            default:
+                break;
+            }
+        }
+
+        private void validateEmail()
+        {
+            Pattern pattern = Pattern.compile("[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,4}");
+            Matcher matcher = pattern.matcher(txtEmail.getText().toUpperCase());
+
+            if (!matcher.matches())
+            {
+                lblEmail.setText("Formato inválido.");
+                fields[0] = false;
+            }
+            else
+            {
+                lblEmail.setText("");
+                fields[0] = true;
+            }
+            checkValidations();
+        }
+
+        private void validateUsername()
+        {
+            String userName = txtUserName.getText();
+
+            if (controller.isValidText(userName))
+            {
+                if (controller.checkUserExistence(userName))
+                {
+                    lblUsername.setText("El usuario ya existe.");
+                    fields[1] = false;
+                }
+                else
+                {
+                    lblUsername.setText("");
+                    fields[1] = true;
+                }
+            }
+            checkValidations();
+        }
+
+        private void validatePswrd()
+        {
+            char[] pass = pswd.getPassword();
+
+            if (pass.length <= 6)
+            {
+                lblPass1.setText("La contraseña debe tener al");
+                lblPass2.setText("menos siete caracteres.");
+                fields[2] = false;
+            }
+            else
+            {
+                lblPass1.setText("");
+                lblPass2.setText("");
+                fields[2] = true;
+            }	   
+            checkValidations();
+        }
+
+        private void validateID()
+        {
+            Pattern pattern = Pattern.compile("8[0-9]+[A-Z]");
+            Matcher matcher = pattern.matcher(txtID.getText().toUpperCase());
+
+            if (!matcher.matches())
+            {
+                lblID.setText("Formato inválido.");
+                fields[3] = false;
+            }
+            else
+            {
+                lblID.setText("");
+                fields[3] = true;
+            }
+            checkValidations();
+        }
+
+        private void validateName()
+        {
+            String name = txtName.getText();
+            if (controller.isValidText(name))
+            {
+            if (!validateCapitalLetter(name))
+            {
+                lblName.setText("Respete a la RAE.");
+                fields[4] = false;
+            }
+            else
+            {
+                lblName.setText("");
+                fields[4] = true;
+            }
+            }
+            checkValidations();
+        }
+
+        private void validateSurname()
+        {
+            String surname = txtSurName.getText();
+            if (controller.isValidText(surname))
+            {
+                if (!validateCapitalLetter(surname))
+                {
+                    lblSurname.setText("Respete a la RAE.");
+                    fields[5] = false;
+                }
+                else
+                {
+                    lblSurname.setText("");
+                    fields[5] = true;
+                }
+            }
+            checkValidations();
+        }
+
+        private boolean validateCapitalLetter(String phrase)
+        {	    
+            return phrase.equals(capitalizeString(phrase));
+        }
+
+        private String capitalizeString(String string)
+        {
+            char[] chars = string.toLowerCase().toCharArray();
+            boolean found = false;
+            for (int i = 0; i < chars.length; i++)
+            {
+                if (!found && Character.isLetter(chars[i]))
+                {
+                    chars[i] = Character.toUpperCase(chars[i]);
+                    found = true;
+                } else if (Character.isWhitespace(chars[i]))
+                { // You can add other chars here
+                    found = false;
+                }
+            }
+            return String.valueOf(chars);
+        }
+
+        private void checkValidations()
+        {
+            boolean flag = true;
+            int i = 0;
+            while (flag && i < fields.length)
+            {    
+                if (!fields[i])
+                {
+                    flag = false;
+                }
+                i++;
+            }
+            btnSend.setEnabled(flag);            
+        }	
     }
 }
