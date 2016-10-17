@@ -6,6 +6,8 @@
 package practicabanco;
 
 import interfaz.*;
+import java.awt.Component;
+import java.awt.Container;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -13,6 +15,7 @@ import java.util.logging.Logger;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 /**
  *
@@ -56,6 +59,7 @@ public class Controller
     {
         mainView.setVisible(false);
         mainView.setEnabled(false);
+	clearContents(accessView);
         accessView.setVisible(true);
         accessView.setEnabled(true);
     }
@@ -64,6 +68,7 @@ public class Controller
     {
         mainView.setVisible(false);
         mainView.setEnabled(false);
+	clearContents(registerView);
         registerView.setVisible(true);
         registerView.setEnabled(true);
     }
@@ -72,6 +77,7 @@ public class Controller
     {
         accessView.setVisible(false);
         accessView.setEnabled(false);
+	clearContents(mainView);
         mainView.setVisible(true);
         mainView.setEnabled(true);
     }
@@ -80,6 +86,16 @@ public class Controller
     {
         registerView.setVisible(false);
         registerView.setEnabled(false);
+	clearContents(mainView);
+        mainView.setVisible(true);
+        mainView.setEnabled(true);
+    }
+    
+    public void cancelInfo()
+    {
+	infoView.setVisible(false);
+	infoView.setEnabled(false);
+	clearContents(mainView);
         mainView.setVisible(true);
         mainView.setEnabled(true);
     }
@@ -135,16 +151,6 @@ public class Controller
             return false;
         }
     }
-
-    //TODO handle the result of validation
-    public void validatePswd(char[] pswd)
-    {
-        boolean flag = true;
-        if (pswd.length < 6)
-        {
-            flag = false;
-        }
-    }
     
     public void access(String userName, JFrame view)
     {
@@ -155,6 +161,51 @@ public class Controller
         view.setEnabled(false);
         infoView.setVisible(true);
         infoView.setEnabled(true);
+    }
+    
+    public void signIn(RegisterView view)
+    {
+	int random = 1 + (int)(Math.random() * 5);
+	String permisos = "";
+	
+	switch (random)
+	{
+	    case 1:
+		permisos = "Root";
+		break;
+	    case 2:
+		permisos = "Senior";
+		break;
+	    case 3:
+		permisos = "Junior";
+		break;
+	    case 4:
+		permisos = "System";
+		break;
+	    case 5:
+		permisos = "Admin";
+		break;
+	    default:
+		throw new AssertionError();
+	}	
+	
+	userList.crearNuevoUsuario(view.getTxtName().getText(), view.getTxtSurName().getText(),
+		view.getTxtID().getText(), view.getTxtEmail().getText(), permisos,
+		view.getTxtUserName().getText(), view.getPswd().getPassword());
+	
+	access(view.getTxtUserName().getText(), view);
+    }
+    
+    public void clearContents(JFrame frame)
+    {
+	Container con = frame.getContentPane();
+	for (Component c : con.getComponents())
+	{
+	    if (c instanceof JTextField)
+	    {
+		((JTextField) c).setText("");
+	    }
+	}
     }
     
     

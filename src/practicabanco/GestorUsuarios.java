@@ -32,7 +32,7 @@ public class GestorUsuarios
     {
     }
     
-    //TODO: Comprobación de existencia del usuario
+    
     public void crearNuevoUsuario(String nombre, String apellidos, String dni,
             String email, String permisos, String userName, char[] password)
     {
@@ -168,7 +168,7 @@ public class GestorUsuarios
 	{
 	    String json     = reader.nextLine();
         
-	    Type stringUserType     = new TypeToken<Map<String,Usuario>>(){}.getType();
+	    Type stringUserType	= new TypeToken<Map<String,Usuario>>(){}.getType();
 
 	    this.userList   = (Map<String,Usuario>) this.gson.fromJson(json, stringUserType);
 	}
