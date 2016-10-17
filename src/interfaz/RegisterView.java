@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 package interfaz;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import practicabanco.Controller;
@@ -30,9 +32,16 @@ public class RegisterView extends javax.swing.JFrame
 	this.lblEmail.setText("");
 	this.lblID.setText("");
 	this.lblName.setText("");
-	this.lblPass.setText("");
+	this.lblPass1.setText("");
+	this.lblPass2.setText("");
 	this.lblSurname.setText("");
 	this.lblUsername.setText("");
+	
+	this.txtSurName.getDocument().addDocumentListener(new FieldsValidator("txtSurname"));
+	this.txtName.getDocument().addDocumentListener(new FieldsValidator("txtName"));
+	this.txtUserName.getDocument().addDocumentListener(new FieldsValidator("txtUsername"));
+	this.pswd.getDocument().addDocumentListener(new FieldsValidator("pswd"));
+	this.txtEmail.getDocument().addDocumentListener(new FieldsValidator("txtEmail"));
     }
 
     /**
@@ -64,11 +73,11 @@ public class RegisterView extends javax.swing.JFrame
         lblEmail = new javax.swing.JLabel();
         lblID = new javax.swing.JLabel();
         lblUsername = new javax.swing.JLabel();
-        lblPass = new javax.swing.JLabel();
+        lblPass1 = new javax.swing.JLabel();
+        lblPass2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("DataTron - Register");
-        setResizable(false);
 
         jLabel1.setText("Nombre");
 
@@ -103,12 +112,20 @@ public class RegisterView extends javax.swing.JFrame
 
         lblUsername.setText("jLabel11");
 
-        lblPass.setText("jLabel12");
+        lblPass1.setText("jLabel12");
+
+        lblPass2.setText("jLabel7");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(94, 94, 94)
+                .addComponent(btnSend)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnCancel)
+                .addGap(102, 102, 102))
             .addGroup(layout.createSequentialGroup()
                 .addGap(93, 93, 93)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -134,19 +151,14 @@ public class RegisterView extends javax.swing.JFrame
                             .addComponent(pswd))))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblPass2)
                     .addComponent(lblName)
                     .addComponent(lblSurname)
                     .addComponent(lblEmail)
                     .addComponent(lblID)
                     .addComponent(lblUsername)
-                    .addComponent(lblPass))
-                .addContainerGap(120, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(94, 94, 94)
-                .addComponent(btnSend)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnCancel)
-                .addGap(102, 102, 102))
+                    .addComponent(lblPass1))
+                .addContainerGap(137, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -184,8 +196,10 @@ public class RegisterView extends javax.swing.JFrame
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(pswd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblPass))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 93, Short.MAX_VALUE)
+                    .addComponent(lblPass1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblPass2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSend)
                     .addComponent(btnCancel))
@@ -261,7 +275,8 @@ public class RegisterView extends javax.swing.JFrame
     private javax.swing.JLabel lblEmail;
     private javax.swing.JLabel lblID;
     private javax.swing.JLabel lblName;
-    private javax.swing.JLabel lblPass;
+    private javax.swing.JLabel lblPass1;
+    private javax.swing.JLabel lblPass2;
     private javax.swing.JLabel lblSurname;
     private javax.swing.JLabel lblUsername;
     private javax.swing.JPasswordField pswd;
@@ -272,44 +287,177 @@ public class RegisterView extends javax.swing.JFrame
     private javax.swing.JTextField txtUserName;
     // End of variables declaration//GEN-END:variables
     
-    class UserNameChecker implements DocumentListener
+    class FieldsValidator implements DocumentListener
     {
+	
+	//TODO method that checks if fields are OK and enables or disables button,
+	//instead of searching for it in every validation method.
+	String name;
+
+	public FieldsValidator(String name)
+	{
+	    this.name = name;
+	}
+	
+	
+	
+	
 	
 	@Override
 	public void insertUpdate(DocumentEvent e)
 	{
-	    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+	    checkToValidate();
 	}
 
 	@Override
 	public void removeUpdate(DocumentEvent e)
 	{
-	    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+	    checkToValidate();
 	}
 
 	@Override
 	public void changedUpdate(DocumentEvent e)
 	{
-	    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+	    checkToValidate();
 	}
 	
-	void check()
+	private void checkToValidate()
 	{
-	    String userName = txtUserName.getText();
-	
-	if (controller.isValidText(userName))
-	{
-	    if (controller.checkUserExistence(userName))
+	    switch (this.name)
 	    {
-		lblUsername.setText("El usuario ya existe.");
+		case "txtName":
+		    validateName();
+		    break;
+		case "txtSurname":
+		    validateSurname();
+		    break;
+		case "txtEmail":
+		    validateEmail();
+		    break;
+		case "txtID":
+		    
+		    break;
+		case "txtUsername":
+		    validateUsername();
+		    break;
+		case "pswd":
+		    validatePswrd();
+		default:
+		    break;
+	    }
+	}
+	
+	private void validateEmail()
+	{
+	    Pattern pattern = Pattern.compile("[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,4}");
+	    Matcher matcher = pattern.matcher(txtEmail.getText().toUpperCase());
+	    
+	    if (!matcher.matches())
+	    {
+		lblEmail.setText("Formato inválido.");
 		btnSend.setEnabled(false);
 	    }
 	    else
 	    {
-		lblUsername.setText("");
+		lblEmail.setText("");
 		btnSend.setEnabled(true);
 	    }
 	}
+	
+	private void validateUsername()
+	{
+	    String userName = txtUserName.getText();
+	
+	    if (controller.isValidText(userName))
+	    {
+		if (controller.checkUserExistence(userName))
+		{
+		    lblUsername.setText("El usuario ya existe.");
+		    btnSend.setEnabled(false);
+		}
+		else
+		{
+		    lblUsername.setText("");
+		    btnSend.setEnabled(true);
+		}
+	    }
+	}
+	
+	private void validatePswrd()
+	{
+	    char[] pass = pswd.getPassword();
+	    
+	    if (pass.length <= 6)
+	    {
+		lblPass1.setText("La contraseña debe tener al");
+		lblPass2.setText("menos siete caracteres.");
+		btnSend.setEnabled(false);
+	    }
+	    else
+	    {
+		lblPass1.setText("");
+		lblPass2.setText("");
+		btnSend.setEnabled(true);
+	    }	    
+	}
+	
+	private void validateName()
+	{
+	    String name = txtName.getText();
+	    if (controller.isValidText(name))
+	    {
+		if (!validateCapitalLetter(name))
+		{
+		    lblName.setText("Respete a la RAE.");
+		    btnSend.setEnabled(false);
+		}
+		else
+		{
+		    lblName.setText("");
+		    btnSend.setEnabled(true);
+		}
+	    }
+	}
+	
+	private void validateSurname()
+	{
+	    String surname = txtSurName.getText();
+	    if (controller.isValidText(surname))
+	    {
+		if (!validateCapitalLetter(surname))
+		{
+		    lblSurname.setText("Respete a la RAE.");
+		    btnSend.setEnabled(false);
+		}
+		else
+		{
+		    lblSurname.setText("");
+		    btnSend.setEnabled(true);
+		}
+	    }
+	}
+	
+	private boolean validateCapitalLetter(String phrase)
+	{	    
+	    return phrase.equals(capitalizeString(phrase));
+	}
+	
+	private String capitalizeString(String string)
+	{
+	    char[] chars = string.toLowerCase().toCharArray();
+	    boolean found = false;
+	    for (int i = 0; i < chars.length; i++)
+	    {
+		if (!found && Character.isLetter(chars[i]))
+		{
+		    chars[i] = Character.toUpperCase(chars[i]);
+		    found = true;
+		} else if (Character.isWhitespace(chars[i]))
+		{ // You can add other chars here
+		    found = false;
+		}
+	    }
+	    return String.valueOf(chars);
 	}
 	
     }

@@ -4,7 +4,6 @@
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
     <Property name="title" type="java.lang.String" value="DataTron - Register"/>
-    <Property name="resizable" type="boolean" value="false"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
@@ -25,6 +24,13 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="94" max="-2" attributes="0"/>
+              <Component id="btnSend" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
+              <Component id="btnCancel" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="102" max="-2" attributes="0"/>
+          </Group>
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="93" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
@@ -57,21 +63,15 @@
               </Group>
               <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="lblPass2" min="-2" max="-2" attributes="0"/>
                   <Component id="lblName" min="-2" max="-2" attributes="0"/>
                   <Component id="lblSurname" min="-2" max="-2" attributes="0"/>
                   <Component id="lblEmail" min="-2" max="-2" attributes="0"/>
                   <Component id="lblID" min="-2" max="-2" attributes="0"/>
                   <Component id="lblUsername" min="-2" max="-2" attributes="0"/>
-                  <Component id="lblPass" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblPass1" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="120" max="32767" attributes="0"/>
-          </Group>
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="94" max="-2" attributes="0"/>
-              <Component id="btnSend" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
-              <Component id="btnCancel" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="102" max="-2" attributes="0"/>
+              <EmptySpace pref="137" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -120,9 +120,11 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="pswd" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="lblPass" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblPass1" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="93" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="lblPass2" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="71" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="btnSend" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnCancel" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -213,9 +215,14 @@
         <Property name="text" type="java.lang.String" value="jLabel11"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="lblPass">
+    <Component class="javax.swing.JLabel" name="lblPass1">
       <Properties>
         <Property name="text" type="java.lang.String" value="jLabel12"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblPass2">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="jLabel7"/>
       </Properties>
     </Component>
   </SubComponents>
