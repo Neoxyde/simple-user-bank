@@ -5,8 +5,7 @@
  */
 package interfaz;
 
-import java.awt.Component;
-import java.awt.Container;
+
 import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
