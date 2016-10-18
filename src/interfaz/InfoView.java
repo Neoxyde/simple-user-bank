@@ -56,6 +56,13 @@ public class InfoView extends javax.swing.JFrame
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("DataTron - Info");
+        addWindowListener(new java.awt.event.WindowAdapter()
+        {
+            public void windowClosing(java.awt.event.WindowEvent evt)
+            {
+                formWindowClosing(evt);
+            }
+        });
 
         btnModify.setText("Modificar");
         btnModify.addActionListener(new java.awt.event.ActionListener()
@@ -175,6 +182,11 @@ public class InfoView extends javax.swing.JFrame
         controller.modifyData(lblName.getText(), lblSurname.getText(), lblEmail.getText(),
 		lblID.getText(), lblUsername.getText(), lblPswd.getText());
     }//GEN-LAST:event_btnModifyActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt)//GEN-FIRST:event_formWindowClosing
+    {//GEN-HEADEREND:event_formWindowClosing
+        controller.exit(this);
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments

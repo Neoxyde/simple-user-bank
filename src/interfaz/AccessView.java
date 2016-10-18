@@ -53,6 +53,13 @@ public class AccessView extends javax.swing.JFrame
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("DataTron - Access");
+        addWindowListener(new java.awt.event.WindowAdapter()
+        {
+            public void windowClosing(java.awt.event.WindowEvent evt)
+            {
+                formWindowClosing(evt);
+            }
+        });
 
         jLabel1.setText("Nombre de Usuario");
 
@@ -127,6 +134,11 @@ public class AccessView extends javax.swing.JFrame
     {//GEN-HEADEREND:event_btnAccessActionPerformed
         controller.validateAccess(this.txtUserName.getText(), this.psw.getPassword());
     }//GEN-LAST:event_btnAccessActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt)//GEN-FIRST:event_formWindowClosing
+    {//GEN-HEADEREND:event_formWindowClosing
+        controller.exit(this);
+    }//GEN-LAST:event_formWindowClosing
     
     
     

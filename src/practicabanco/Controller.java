@@ -229,6 +229,10 @@ public class Controller
     public void modifyUser(String lastUser, String name, String surname, String email, String id,
             String userName, String pswd)
     {
+	String help;
+	if (userName == null) help = lastUser;
+	else help = userName;
+	
         if (name != null)
         {
             userList.modificarUsuario(lastUser, "nombre", name);
@@ -253,7 +257,11 @@ public class Controller
         {
             userList.modificarUsuario(lastUser, "password", pswd);
         }
-        access(userName, modifyView);
+	if (true)
+	{
+	    
+	}
+        access(help, modifyView);
     }
 
     public void clearContents(JFrame frame)

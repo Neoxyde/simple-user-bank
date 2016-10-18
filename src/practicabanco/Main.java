@@ -21,7 +21,7 @@ public class Main
     public static void main(String[] args) throws IOException 
     {
 	GestorUsuarios userList = new GestorUsuarios();
-	userList.crearNuevoUsuario("Geralt", "De Rivia", "12345678R", "brujoprofesional@gmail.com", "root", "Geraldo", new char[] {'b','e','s','t'});
+	
 	
 	//Main view instantiated and set visible on controller
 	Controller controller = new Controller(userList);

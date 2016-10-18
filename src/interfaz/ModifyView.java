@@ -72,6 +72,8 @@ public class ModifyView extends javax.swing.JFrame
             fields[i] = true;
         }
     }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -111,6 +113,13 @@ public class ModifyView extends javax.swing.JFrame
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("DataTron - Alter data");
+        addWindowListener(new java.awt.event.WindowAdapter()
+        {
+            public void windowClosing(java.awt.event.WindowEvent evt)
+            {
+                formWindowClosing(evt);
+            }
+        });
 
         jLabel1.setText("Nombre");
 
@@ -281,6 +290,11 @@ public class ModifyView extends javax.swing.JFrame
                 nullator(isEmailEqual, txtEmail.getText()), nullator(isIDEqual, txtID.getText()),
                 nullator(isUsernameEqual, txtUserName.getText()), nullator(isPassEqual, String.valueOf(pswd)));
     }//GEN-LAST:event_btnSendActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt)//GEN-FIRST:event_formWindowClosing
+    {//GEN-HEADEREND:event_formWindowClosing
+        controller.exit(this);
+    }//GEN-LAST:event_formWindowClosing
     
     
     

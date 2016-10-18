@@ -43,6 +43,13 @@ public class MainView extends javax.swing.JFrame
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle(" DataTron - Main");
+        addWindowListener(new java.awt.event.WindowAdapter()
+        {
+            public void windowClosing(java.awt.event.WindowEvent evt)
+            {
+                formWindowClosing(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -107,6 +114,11 @@ public class MainView extends javax.swing.JFrame
     {//GEN-HEADEREND:event_btnRegisterActionPerformed
         controller.switchMainToRegister();
     }//GEN-LAST:event_btnRegisterActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt)//GEN-FIRST:event_formWindowClosing
+    {//GEN-HEADEREND:event_formWindowClosing
+        controller.exit(this);
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments

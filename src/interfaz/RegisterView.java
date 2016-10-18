@@ -94,6 +94,13 @@ public class RegisterView extends javax.swing.JFrame
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("DataTron - Register");
+        addWindowListener(new java.awt.event.WindowAdapter()
+        {
+            public void windowClosing(java.awt.event.WindowEvent evt)
+            {
+                formWindowClosing(evt);
+            }
+        });
 
         jLabel1.setText("Nombre");
 
@@ -241,6 +248,11 @@ public class RegisterView extends javax.swing.JFrame
     {//GEN-HEADEREND:event_btnSendActionPerformed
 	controller.signIn(this);
     }//GEN-LAST:event_btnSendActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt)//GEN-FIRST:event_formWindowClosing
+    {//GEN-HEADEREND:event_formWindowClosing
+        controller.exit(this);
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments
@@ -446,7 +458,7 @@ public class RegisterView extends javax.swing.JFrame
 	    {
 		if (!validateCapitalLetter(name))
 		{
-		    lblName.setText("Respete a la RAE.");
+		    lblName.setText("Primera letra mayúscula.");
 		    fields[4] = false;
 		} else
 		{
@@ -464,7 +476,7 @@ public class RegisterView extends javax.swing.JFrame
 	    {
 		if (!validateCapitalLetter(surname))
 		{
-		    lblSurname.setText("Respete a la RAE.");
+		    lblSurname.setText("Primera letra mayúscula.");
 		    fields[5] = false;
 		} else
 		{
