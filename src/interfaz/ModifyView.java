@@ -7,6 +7,7 @@ package interfaz;
 
 import java.awt.Component;
 import java.awt.Container;
+import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JPasswordField;
@@ -19,21 +20,21 @@ import practicabanco.Controller;
  *
  * @author David
  */
-public class RegisterView extends javax.swing.JFrame
+public class ModifyView extends javax.swing.JFrame
 {
     
     private Controller controller;
-    boolean[] fields = new boolean[6];
+    boolean[] fields = new boolean[7];
 
     /**
      * Creates new form RegisterWindow
      */
-    public RegisterView()
+    public ModifyView()
     {
 	initComponents();
     }
 
-    public RegisterView(Controller controller)
+    public ModifyView(Controller controller)
     {
 	initComponents();
 	this.controller = controller;
@@ -51,9 +52,8 @@ public class RegisterView extends javax.swing.JFrame
 	this.txtUserName.getDocument().addDocumentListener(new FieldsValidator("txtUsername"));
 	this.pswd.getDocument().addDocumentListener(new FieldsValidator("pswd"));
 	this.txtEmail.getDocument().addDocumentListener(new FieldsValidator("txtEmail"));
+	this.pswd2.getDocument().addDocumentListener(new FieldsValidator("pswd2"));
 	
-	this.btnSend.setEnabled(false);
-
 	for (int i = 0; i < fields.length; i++)
 	{
 	    fields[i] = true;
@@ -91,6 +91,9 @@ public class RegisterView extends javax.swing.JFrame
         lblUsername = new javax.swing.JLabel();
         lblPass1 = new javax.swing.JLabel();
         lblPass2 = new javax.swing.JLabel();
+        pswd2 = new javax.swing.JPasswordField();
+        jLabel7 = new javax.swing.JLabel();
+        lblPswd2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("DataTron - Register");
@@ -139,6 +142,10 @@ public class RegisterView extends javax.swing.JFrame
 
         lblPass2.setText("jLabel7");
 
+        jLabel7.setText("Repite contraseña");
+
+        lblPswd2.setText("jLabel8");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -167,11 +174,13 @@ public class RegisterView extends javax.swing.JFrame
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel6)
-                            .addComponent(jLabel5))
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel7))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtUserName, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
-                            .addComponent(pswd))))
+                            .addComponent(txtUserName)
+                            .addComponent(pswd)
+                            .addComponent(pswd2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblPass2)
@@ -180,7 +189,8 @@ public class RegisterView extends javax.swing.JFrame
                     .addComponent(lblEmail)
                     .addComponent(lblID)
                     .addComponent(lblUsername)
-                    .addComponent(lblPass1))
+                    .addComponent(lblPass1)
+                    .addComponent(lblPswd2))
                 .addContainerGap(138, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -222,7 +232,12 @@ public class RegisterView extends javax.swing.JFrame
                     .addComponent(lblPass1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblPass2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 90, Short.MAX_VALUE)
+                .addGap(17, 17, 17)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(pswd2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7)
+                    .addComponent(lblPswd2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSend)
                     .addComponent(btnCancel))
@@ -234,12 +249,12 @@ public class RegisterView extends javax.swing.JFrame
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnCancelActionPerformed
     {//GEN-HEADEREND:event_btnCancelActionPerformed
-	controller.cancelRegister();
+	controller.cancelModify();
     }//GEN-LAST:event_btnCancelActionPerformed
 
     private void btnSendActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnSendActionPerformed
     {//GEN-HEADEREND:event_btnSendActionPerformed
-	controller.signIn(this);
+	
     }//GEN-LAST:event_btnSendActionPerformed
 
     /**
@@ -264,17 +279,19 @@ public class RegisterView extends javax.swing.JFrame
 	    }
 	} catch (ClassNotFoundException ex)
 	{
-	    java.util.logging.Logger.getLogger(RegisterView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+	    java.util.logging.Logger.getLogger(ModifyView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 	} catch (InstantiationException ex)
 	{
-	    java.util.logging.Logger.getLogger(RegisterView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+	    java.util.logging.Logger.getLogger(ModifyView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 	} catch (IllegalAccessException ex)
 	{
-	    java.util.logging.Logger.getLogger(RegisterView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+	    java.util.logging.Logger.getLogger(ModifyView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 	} catch (javax.swing.UnsupportedLookAndFeelException ex)
 	{
-	    java.util.logging.Logger.getLogger(RegisterView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+	    java.util.logging.Logger.getLogger(ModifyView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 	}
+	//</editor-fold>
+	//</editor-fold>
 	//</editor-fold>
 	//</editor-fold>
 
@@ -283,9 +300,21 @@ public class RegisterView extends javax.swing.JFrame
 	{
 	    public void run()
 	    {
-		new RegisterView().setVisible(true);
+		new ModifyView().setVisible(true);
 	    }
 	});
+    }
+    
+    public void setPreliminaryData(String name, String surname, String email, String id,
+            String userName, String pswd)
+    {
+	txtName.setText(name);
+	txtSurName.setText(surname);
+	txtEmail.setText(email);
+	txtID.setText(id);
+	txtUserName.setText(userName);
+	this.pswd.setText(pswd);
+	this.pswd2.setText(pswd);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -297,14 +326,17 @@ public class RegisterView extends javax.swing.JFrame
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel lblEmail;
     private javax.swing.JLabel lblID;
     private javax.swing.JLabel lblName;
     private javax.swing.JLabel lblPass1;
     private javax.swing.JLabel lblPass2;
+    private javax.swing.JLabel lblPswd2;
     private javax.swing.JLabel lblSurname;
     private javax.swing.JLabel lblUsername;
     private javax.swing.JPasswordField pswd;
+    private javax.swing.JPasswordField pswd2;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtID;
     private javax.swing.JTextField txtName;
@@ -363,9 +395,25 @@ public class RegisterView extends javax.swing.JFrame
 		    break;
 		case "pswd":
 		    validatePswrd();
+		case "pswd2":
+		    validatePswd2();
 		default:
 		    break;
 	    }
+	}
+	private void validatePswd2()
+	{
+	    if (Arrays.equals(pswd.getPassword(), pswd2.getPassword()))
+	    {
+		fields[6] = true;
+		lblPswd2.setText("");
+	    }
+	    else
+	    {
+		fields[6] = false;
+		lblPswd2.setText("Las contraseñas difieren.");
+	    }
+	    checkValidations();
 	}
 
 	private void validateEmail()
@@ -491,7 +539,7 @@ public class RegisterView extends javax.swing.JFrame
 		    chars[i] = Character.toUpperCase(chars[i]);
 		    found = true;
 		} else if (Character.isWhitespace(chars[i]))
-		{ // You can add other chars here
+		{ 
 		    found = false;
 		}
 	    }
@@ -513,6 +561,7 @@ public class RegisterView extends javax.swing.JFrame
 	    btnSend.setEnabled(flag && checkEmptiness());
 	}
 	
+	//
 	private boolean checkEmptiness()
 	{
 	    boolean token = true;

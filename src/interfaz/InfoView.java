@@ -57,6 +57,13 @@ public class InfoView extends javax.swing.JFrame
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         btnModify.setText("Modificar");
+        btnModify.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                btnModifyActionPerformed(evt);
+            }
+        });
 
         btnBack.setText("Volver");
         btnBack.addActionListener(new java.awt.event.ActionListener()
@@ -161,6 +168,12 @@ public class InfoView extends javax.swing.JFrame
     {//GEN-HEADEREND:event_btnBackActionPerformed
         controller.cancelInfo();
     }//GEN-LAST:event_btnBackActionPerformed
+
+    private void btnModifyActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnModifyActionPerformed
+    {//GEN-HEADEREND:event_btnModifyActionPerformed
+        controller.modifyData(lblName.getText(), lblSurname.getText(), lblEmail.getText(),
+		lblID.getText(), lblUsername.getText(), lblPswd.getText());
+    }//GEN-LAST:event_btnModifyActionPerformed
 
     /**
      * @param args the command line arguments

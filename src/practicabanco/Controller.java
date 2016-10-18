@@ -29,6 +29,7 @@ public class Controller
     private RegisterView registerView;
     private AccessView accessView;
     private InfoView infoView;
+    private ModifyView modifyView;
 
     public Controller()
     {
@@ -38,9 +39,10 @@ public class Controller
     {
         this.userList = userList;
         this.mainView = new MainView(this);
-        this.registerView = new RegisterView(this);
-        this.accessView = new AccessView(this);
-        this.infoView = new InfoView(this);
+        this.registerView   = new RegisterView(this);
+        this.accessView	= new AccessView(this);
+        this.infoView	= new InfoView(this);
+	this.modifyView = new ModifyView(this);
 
         this.mainView.setEnabled(true);
         this.mainView.setVisible(true);
@@ -72,6 +74,15 @@ public class Controller
         registerView.setVisible(true);
         registerView.setEnabled(true);
     }
+    
+    public void switchInfoToModify()
+    {
+	infoView.setVisible(false);
+	infoView.setEnabled(false);
+	clearContents(modifyView);
+	modifyView.setVisible(true);
+	modifyView.setEnabled(true);
+    }
 
     public void cancelAccess()
     {
@@ -98,6 +109,15 @@ public class Controller
 	clearContents(mainView);
         mainView.setVisible(true);
         mainView.setEnabled(true);
+    }
+    
+    public void cancelModify()
+    {
+	modifyView.setVisible(false);
+	modifyView.setEnabled(false);
+	clearContents(mainView);
+	mainView.setVisible(true);
+        mainView.setEnabled(true);	
     }
 
     public void exit(JFrame window)
@@ -196,6 +216,16 @@ public class Controller
 	access(view.getTxtUserName().getText(), view);
     }
     
+    public void modifyData(String name, String surname, String email, String id,
+            String userName, String pswd)
+    {
+	infoView.setVisible(false);
+	infoView.setEnabled(false);
+	modifyView.setPreliminaryData(name, surname, email, id, userName, pswd);
+	modifyView.setEnabled(true);
+	modifyView.setVisible(true);
+    }
+    
     public void clearContents(JFrame frame)
     {
 	Container con = frame.getContentPane();
@@ -207,7 +237,5 @@ public class Controller
 	    }
 	}
     }
-    
-    
     
 }
