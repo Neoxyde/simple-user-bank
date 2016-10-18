@@ -55,6 +55,7 @@ public class InfoView extends javax.swing.JFrame
         lblPswd = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("DataTron - Info");
 
         btnModify.setText("Modificar");
         btnModify.addActionListener(new java.awt.event.ActionListener()

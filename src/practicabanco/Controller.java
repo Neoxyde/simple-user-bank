@@ -39,10 +39,10 @@ public class Controller
     {
         this.userList = userList;
         this.mainView = new MainView(this);
-        this.registerView   = new RegisterView(this);
-        this.accessView	= new AccessView(this);
-        this.infoView	= new InfoView(this);
-	this.modifyView = new ModifyView(this);
+        this.registerView = new RegisterView(this);
+        this.accessView = new AccessView(this);
+        this.infoView = new InfoView(this);
+        this.modifyView = new ModifyView(this);
 
         this.mainView.setEnabled(true);
         this.mainView.setVisible(true);
@@ -61,7 +61,7 @@ public class Controller
     {
         mainView.setVisible(false);
         mainView.setEnabled(false);
-	clearContents(accessView);
+        clearContents(accessView);
         accessView.setVisible(true);
         accessView.setEnabled(true);
     }
@@ -70,25 +70,25 @@ public class Controller
     {
         mainView.setVisible(false);
         mainView.setEnabled(false);
-	clearContents(registerView);
+        clearContents(registerView);
         registerView.setVisible(true);
         registerView.setEnabled(true);
     }
-    
+
     public void switchInfoToModify()
     {
-	infoView.setVisible(false);
-	infoView.setEnabled(false);
-	clearContents(modifyView);
-	modifyView.setVisible(true);
-	modifyView.setEnabled(true);
+        infoView.setVisible(false);
+        infoView.setEnabled(false);
+        clearContents(modifyView);
+        modifyView.setVisible(true);
+        modifyView.setEnabled(true);
     }
 
     public void cancelAccess()
     {
         accessView.setVisible(false);
         accessView.setEnabled(false);
-	clearContents(mainView);
+        clearContents(mainView);
         mainView.setVisible(true);
         mainView.setEnabled(true);
     }
@@ -97,27 +97,27 @@ public class Controller
     {
         registerView.setVisible(false);
         registerView.setEnabled(false);
-	clearContents(mainView);
+        clearContents(mainView);
         mainView.setVisible(true);
         mainView.setEnabled(true);
     }
-    
+
     public void cancelInfo()
     {
-	infoView.setVisible(false);
-	infoView.setEnabled(false);
-	clearContents(mainView);
+        infoView.setVisible(false);
+        infoView.setEnabled(false);
+        clearContents(mainView);
         mainView.setVisible(true);
         mainView.setEnabled(true);
     }
-    
+
     public void cancelModify()
     {
-	modifyView.setVisible(false);
-	modifyView.setEnabled(false);
-	clearContents(mainView);
-	mainView.setVisible(true);
-        mainView.setEnabled(true);	
+        modifyView.setVisible(false);
+        modifyView.setEnabled(false);
+        clearContents(mainView);
+        mainView.setVisible(true);
+        mainView.setEnabled(true);
     }
 
     public void exit(JFrame window)
@@ -171,7 +171,7 @@ public class Controller
             return false;
         }
     }
-    
+
     public void access(String userName, JFrame view)
     {
         Usuario user = userList.buscarUsuario(userName);
@@ -182,60 +182,90 @@ public class Controller
         infoView.setVisible(true);
         infoView.setEnabled(true);
     }
-    
+
     public void signIn(RegisterView view)
     {
-	int random = 1 + (int)(Math.random() * 5);
-	String permisos = "";
-	
-	switch (random)
-	{
-	    case 1:
-		permisos = "Root";
-		break;
-	    case 2:
-		permisos = "Senior";
-		break;
-	    case 3:
-		permisos = "Junior";
-		break;
-	    case 4:
-		permisos = "System";
-		break;
-	    case 5:
-		permisos = "Admin";
-		break;
-	    default:
-		throw new AssertionError();
-	}	
-	
-	userList.crearNuevoUsuario(view.getTxtName().getText(), view.getTxtSurName().getText(),
-		view.getTxtID().getText(), view.getTxtEmail().getText(), permisos,
-		view.getTxtUserName().getText(), view.getPswd().getPassword());
-	
-	access(view.getTxtUserName().getText(), view);
+        int random = 1 + (int) (Math.random() * 5);
+        String permisos = "";
+
+        switch (random)
+        {
+            case 1:
+                permisos = "Root";
+                break;
+            case 2:
+                permisos = "Senior";
+                break;
+            case 3:
+                permisos = "Junior";
+                break;
+            case 4:
+                permisos = "System";
+                break;
+            case 5:
+                permisos = "Admin";
+                break;
+            default:
+                throw new AssertionError();
+        }
+
+        userList.crearNuevoUsuario(view.getTxtName().getText(), view.getTxtSurName().getText(),
+                view.getTxtID().getText(), view.getTxtEmail().getText(), permisos,
+                view.getTxtUserName().getText(), view.getPswd().getPassword());
+
+        access(view.getTxtUserName().getText(), view);
     }
-    
+
     public void modifyData(String name, String surname, String email, String id,
             String userName, String pswd)
     {
-	infoView.setVisible(false);
-	infoView.setEnabled(false);
-	modifyView.setPreliminaryData(name, surname, email, id, userName, pswd);
-	modifyView.setEnabled(true);
-	modifyView.setVisible(true);
+        infoView.setVisible(false);
+        infoView.setEnabled(false);
+        modifyView.setPreliminaryData(name, surname, email, id, userName, pswd);
+        modifyView.setEnabled(true);
+        modifyView.setVisible(true);
     }
     
+    public void modifyUser(String lastUser, String name, String surname, String email, String id,
+            String userName, String pswd)
+    {
+        if (name != null)
+        {
+            userList.modificarUsuario(lastUser, "nombre", name);
+        }
+        if (surname != null)
+        {
+            userList.modificarUsuario(lastUser, "apellidos", surname);
+        }
+        if (email != null)
+        {
+            userList.modificarUsuario(lastUser, "email", email);
+        }
+        if (id != null)
+        {
+            userList.modificarUsuario(lastUser, "dni", id);
+        }
+        if (userName != null)
+        {
+            userList.modificarUsuario(lastUser, "userName", userName);
+        }
+        if (pswd != null)
+        {
+            userList.modificarUsuario(lastUser, "password", pswd);
+        }
+        access(userName, modifyView);
+    }
+
     public void clearContents(JFrame frame)
     {
-	Container con = frame.getContentPane();
-	for (Component c : con.getComponents())
-	{
-	    if (c instanceof JTextField)
-	    {
-		((JTextField) c).setText("");
-	    }
-	}
+        Container con = frame.getContentPane();
+        for (Component c : con.getComponents())
+        {
+            if (c instanceof JTextField)
+            {
+                ((JTextField) c).setText("");
+            }
+        }
     }
-    
+
 }
