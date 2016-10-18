@@ -334,8 +334,15 @@ public class ModifyView extends javax.swing.JFrame
 
     public void setPreliminaryData(String name, String surname, String email, String id,
             String userName, String pswd)
-    {
-        txtName.setText(name);
+    {        
+	storedName  = name;
+        storedSurname   = surname;
+        storedEmail = email;
+        storedID    = id;
+        storedUsername  = userName;
+        storedPass  = pswd;
+	
+	txtName.setText(name);
         txtSurName.setText(surname);
         txtEmail.setText(email);
         txtID.setText(id);
@@ -343,12 +350,7 @@ public class ModifyView extends javax.swing.JFrame
         this.pswd.setText(pswd);
         this.pswd2.setText(pswd);
         
-        storedName  = name;
-        storedSurname   = surname;
-        storedEmail = email;
-        storedID    = id;
-        storedUsername  = userName;
-        storedPass  = pswd;
+        
     }
     
     private String nullator(boolean check, String s)
