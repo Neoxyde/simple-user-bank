@@ -153,7 +153,7 @@ public class GestorUsuarios
     public void serialize() throws IOException
     {
 	try (FileWriter writer = new FileWriter
-		    ("C:\\Users\\David\\Documents\\NetBeansProjects\\PracticaBanco\\src\\practicabanco\\Data.json"))
+		    ("Data.json"))
 	{
 	    String json = this.gson.toJson(this.userList);
 	    
@@ -163,7 +163,7 @@ public class GestorUsuarios
     
     public void read() throws FileNotFoundException
     {
-        File file       = new File("C:\\Users\\David\\Documents\\NetBeansProjects\\PracticaBanco\\src\\practicabanco\\Data.json");
+        File file       = new File("Data.json");
         
         Scanner reader  = new Scanner(file);
         
