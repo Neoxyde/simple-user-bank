@@ -46,13 +46,11 @@ public class InfoView extends javax.swing.JFrame
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
         lblName = new javax.swing.JLabel();
         lblSurname = new javax.swing.JLabel();
         lblEmail = new javax.swing.JLabel();
         lblID = new javax.swing.JLabel();
         lblUsername = new javax.swing.JLabel();
-        lblPswd = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("DataTron - Info");
@@ -92,8 +90,6 @@ public class InfoView extends javax.swing.JFrame
 
         jLabel5.setText("Nombre de Usuario");
 
-        jLabel6.setText("Contraseña");
-
         lblName.setText("jLabel7");
 
         lblSurname.setText("jLabel8");
@@ -103,8 +99,6 @@ public class InfoView extends javax.swing.JFrame
         lblID.setText("jLabel10");
 
         lblUsername.setText("jLabel11");
-
-        lblPswd.setText("jLabel12");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -119,7 +113,6 @@ public class InfoView extends javax.swing.JFrame
             .addGroup(layout.createSequentialGroup()
                 .addGap(90, 90, 90)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel6)
                     .addComponent(jLabel5)
                     .addComponent(jLabel3)
                     .addComponent(jLabel2)
@@ -131,8 +124,7 @@ public class InfoView extends javax.swing.JFrame
                     .addComponent(lblSurname)
                     .addComponent(lblEmail)
                     .addComponent(lblID)
-                    .addComponent(lblUsername)
-                    .addComponent(lblPswd))
+                    .addComponent(lblUsername))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -158,11 +150,7 @@ public class InfoView extends javax.swing.JFrame
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(lblUsername))
-                .addGap(36, 36, 36)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(lblPswd))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 91, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 81, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnModify)
                     .addComponent(btnBack))
@@ -180,7 +168,7 @@ public class InfoView extends javax.swing.JFrame
     private void btnModifyActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnModifyActionPerformed
     {//GEN-HEADEREND:event_btnModifyActionPerformed
         controller.modifyData(lblName.getText(), lblSurname.getText(), lblEmail.getText(),
-		lblID.getText(), lblUsername.getText(), lblPswd.getText());
+		lblID.getText(), lblUsername.getText());
     }//GEN-LAST:event_btnModifyActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt)//GEN-FIRST:event_formWindowClosing
@@ -241,24 +229,21 @@ public class InfoView extends javax.swing.JFrame
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel lblEmail;
     private javax.swing.JLabel lblID;
     private javax.swing.JLabel lblName;
-    private javax.swing.JLabel lblPswd;
     private javax.swing.JLabel lblSurname;
     private javax.swing.JLabel lblUsername;
     // End of variables declaration//GEN-END:variables
 
     public void setLabelValues(String name, String surname, String email, String id,
-            String userName, String pswd)
+            String userName)
     {
         lblEmail.setText(email);
         lblName.setText(name);
         lblSurname.setText(surname);
         lblID.setText(id);
         lblUsername.setText(userName);
-        lblPswd.setText(pswd);
     }
 
     

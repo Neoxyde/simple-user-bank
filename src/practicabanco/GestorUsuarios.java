@@ -136,8 +136,11 @@ public class GestorUsuarios
                 else
                 {
                     toModify.setUserName(nuevoValor);
+		    userList.remove(userName);
+		    userList.put(nuevoValor, toModify);
                     responseKey = 1;
                 }
+		break;
             default:
                 throw new AssertionError();
         }
@@ -150,7 +153,7 @@ public class GestorUsuarios
     public void serialize() throws IOException
     {
 	try (FileWriter writer = new FileWriter
-		    ("..\\PracticaBanco\\src\\practicabanco\\Data.json"))
+		    ("C:\\Users\\David\\Documents\\NetBeansProjects\\PracticaBanco\\src\\practicabanco\\Data.json"))
 	{
 	    String json = this.gson.toJson(this.userList);
 	    
@@ -160,7 +163,7 @@ public class GestorUsuarios
     
     public void read() throws FileNotFoundException
     {
-        File file       = new File("..\\PracticaBanco\\src\\practicabanco\\Data.json");
+        File file       = new File("C:\\Users\\David\\Documents\\NetBeansProjects\\PracticaBanco\\src\\practicabanco\\Data.json");
         
         Scanner reader  = new Scanner(file);
         

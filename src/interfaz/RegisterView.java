@@ -7,6 +7,7 @@ package interfaz;
 
 import java.awt.Component;
 import java.awt.Container;
+import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JPasswordField;
@@ -23,7 +24,7 @@ public class RegisterView extends javax.swing.JFrame
 {
     
     private Controller controller;
-    boolean[] fields = new boolean[6];
+    boolean[] fields = new boolean[7];
 
     /**
      * Creates new form RegisterWindow
@@ -51,6 +52,7 @@ public class RegisterView extends javax.swing.JFrame
 	this.txtUserName.getDocument().addDocumentListener(new FieldsValidator("txtUsername"));
 	this.pswd.getDocument().addDocumentListener(new FieldsValidator("pswd"));
 	this.txtEmail.getDocument().addDocumentListener(new FieldsValidator("txtEmail"));
+	this.pswd2.getDocument().addDocumentListener(new FieldsValidator("pswd2"));
 	
 	this.btnSend.setEnabled(false);
 
@@ -91,6 +93,9 @@ public class RegisterView extends javax.swing.JFrame
         lblUsername = new javax.swing.JLabel();
         lblPass1 = new javax.swing.JLabel();
         lblPass2 = new javax.swing.JLabel();
+        pswd2 = new javax.swing.JPasswordField();
+        jLabel7 = new javax.swing.JLabel();
+        lblPswd2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("DataTron - Register");
@@ -146,6 +151,8 @@ public class RegisterView extends javax.swing.JFrame
 
         lblPass2.setText("jLabel7");
 
+        jLabel7.setText("Repita contraseña");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -174,11 +181,13 @@ public class RegisterView extends javax.swing.JFrame
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel6)
-                            .addComponent(jLabel5))
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel7))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtUserName, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
-                            .addComponent(pswd))))
+                            .addComponent(txtUserName)
+                            .addComponent(pswd)
+                            .addComponent(pswd2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblPass2)
@@ -187,7 +196,8 @@ public class RegisterView extends javax.swing.JFrame
                     .addComponent(lblEmail)
                     .addComponent(lblID)
                     .addComponent(lblUsername)
-                    .addComponent(lblPass1))
+                    .addComponent(lblPass1)
+                    .addComponent(lblPswd2))
                 .addContainerGap(138, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -229,7 +239,12 @@ public class RegisterView extends javax.swing.JFrame
                     .addComponent(lblPass1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblPass2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 90, Short.MAX_VALUE)
+                .addGap(17, 17, 17)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(pswd2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7)
+                    .addComponent(lblPswd2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSend)
                     .addComponent(btnCancel))
@@ -309,14 +324,17 @@ public class RegisterView extends javax.swing.JFrame
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel lblEmail;
     private javax.swing.JLabel lblID;
     private javax.swing.JLabel lblName;
     private javax.swing.JLabel lblPass1;
     private javax.swing.JLabel lblPass2;
+    private javax.swing.JLabel lblPswd2;
     private javax.swing.JLabel lblSurname;
     private javax.swing.JLabel lblUsername;
     private javax.swing.JPasswordField pswd;
+    private javax.swing.JPasswordField pswd2;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtID;
     private javax.swing.JTextField txtName;
@@ -375,6 +393,8 @@ public class RegisterView extends javax.swing.JFrame
 		    break;
 		case "pswd":
 		    validatePswrd();
+		case "pswd2":
+		    validatePswd2();
 		default:
 		    break;
 	    }
@@ -433,6 +453,20 @@ public class RegisterView extends javax.swing.JFrame
 	    }
 	    checkValidations();
 	}
+	
+	private void validatePswd2()
+        {
+            if (Arrays.equals(pswd.getPassword(), pswd2.getPassword()))
+            {
+                fields[6] = true;
+                lblPswd2.setText("");
+            } else
+            {
+                fields[6] = false;
+                lblPswd2.setText("Las contraseñas difieren.");
+            }
+            checkValidations();
+        }
 
 	private void validateID()
 	{

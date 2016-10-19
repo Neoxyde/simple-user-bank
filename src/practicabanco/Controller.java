@@ -176,7 +176,7 @@ public class Controller
     {
         Usuario user = userList.buscarUsuario(userName);
         infoView.setLabelValues(user.getNombre(), user.getApellidos(),
-                user.getEmail(), user.getDni(), user.getUserName(), new String(user.getPassword()));
+                user.getEmail(), user.getDni(), user.getUserName());
         view.setVisible(false);
         view.setEnabled(false);
         infoView.setVisible(true);
@@ -217,11 +217,11 @@ public class Controller
     }
 
     public void modifyData(String name, String surname, String email, String id,
-            String userName, String pswd)
+            String userName)
     {
         infoView.setVisible(false);
         infoView.setEnabled(false);
-        modifyView.setPreliminaryData(name, surname, email, id, userName, pswd);
+        modifyView.setPreliminaryData(name, surname, email, id, userName, new String(userList.buscarUsuario(userName).getPassword()));
         modifyView.setEnabled(true);
         modifyView.setVisible(true);
     }

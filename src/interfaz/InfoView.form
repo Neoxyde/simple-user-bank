@@ -37,7 +37,6 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="90" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
-                  <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
@@ -51,7 +50,6 @@
                   <Component id="lblEmail" min="-2" max="-2" attributes="0"/>
                   <Component id="lblID" min="-2" max="-2" attributes="0"/>
                   <Component id="lblUsername" min="-2" max="-2" attributes="0"/>
-                  <Component id="lblPswd" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
@@ -85,12 +83,7 @@
                   <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="lblUsername" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="lblPswd" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace pref="91" max="32767" attributes="0"/>
+              <EmptySpace pref="81" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="btnModify" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnBack" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -142,11 +135,6 @@
         <Property name="text" type="java.lang.String" value="Nombre de Usuario"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel6">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Contrase&#xf1;a"/>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JLabel" name="lblName">
       <Properties>
         <Property name="text" type="java.lang.String" value="jLabel7"/>
@@ -170,11 +158,6 @@
     <Component class="javax.swing.JLabel" name="lblUsername">
       <Properties>
         <Property name="text" type="java.lang.String" value="jLabel11"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="lblPswd">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jLabel12"/>
       </Properties>
     </Component>
   </SubComponents>
